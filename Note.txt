@@ -1,0 +1,5 @@
+command
+
+uv run manim -pql scenes\2025_06_updated.py CircleAngleQuestion
+
+uv run manim -pqh scenes\2025_06_updated.py CircleAngleQuestion
