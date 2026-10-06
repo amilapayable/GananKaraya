@@ -236,22 +236,6 @@ class CircleAngleQuestion(Scene):
 
         self.wait(2)
 
-        # =========================================================
-        # 8. Mark AOC = 110 degrees
-        #
-        # IMPORTANT:
-        # Do NOT show ADC or ABC values here.
-        # =========================================================
-
-        # angle_AOC = Angle(
-        #     line_AO,
-        #     line_OC,
-        #     radius= -0.65,
-        #     color=BLACK
-        # )
-
-        # self.play(Create(angle_AOC))
-
         angle_text = MathTex(
             r"110^\circ",
             font_size=34,
@@ -372,21 +356,7 @@ class CircleAngleQuestion(Scene):
             run_time=1.5
         )
 
-        # self.wait(2)
 
-        # =========================================================
-        # At this point the diagram is complete.
-        #
-        # It contains:
-        #   A, B, C, D, O
-        #   AD, DC, CB, BA
-        #   AO, OC
-        #   110°
-        #
-        # NO ADC / ABC values are shown yet.
-        # =========================================================
-
-        # self.wait(5)
 
         # =========================================================
         # . Move Question to left
@@ -398,25 +368,6 @@ class CircleAngleQuestion(Scene):
             run_time=1
         )
 
-        # =========================================================
-        # 9. Explain the first step
-        # =========================================================
-
-        # explanation = Text(
-
-        #     "ඕනෑම ලක්ෂයක් වටා ඇති සියලුම කොන වල එකතුව 360° කි \n වෘත්තයේ සම්පූර්ණ කෝණය = 360°",
-        #     font="Iskoola Pota",
-        #     font_size=30,
-        #     color=BLACK
-        # )
-
-        # explanation.to_edge(UP)
-        # explanation.shift(DOWN * 0.8)
-
-        # self.play(Write(explanation))
-        # self.wait(2)
-
-        # self.play(FadeOut(explanation))
 
         explanation = Text(
             "ඕනෑම ලක්ෂයක් වටා ඇති සියලුම කොන වල එකතුව 360°\n"
@@ -449,8 +400,6 @@ class CircleAngleQuestion(Scene):
         # =========================================================
 
         theory = Text(
-            # "පරිධියේ කෝණය = එයට අදාළ චාපයේ\n"
-            # "කෝණයෙන් භාගයකි",
             "වෘත්ත චාපයක් මගින් කේන්ද්‍රයේ ආපාතනය කරන කෝණය \n පරිධියේ ආපාතනය කරන කෝණය මෙන් දෙගුණයක් වේ",
             font="Iskoola Pota",
             font_size=34,
@@ -495,33 +444,9 @@ class CircleAngleQuestion(Scene):
         self.play(Write(calculation1))
         self.wait(2)
 
-        # Shrink and move underneath the theory
-        # self.play(
-        #     calculation1.animate
-        #     .scale(25 / 38)
-        #     .next_to(theory, DOWN, buff=0.35),
-        #     run_time=1
-        # )
 
         self.wait(7)
         self.wait(15)
-
-
-        # calculation2 = MathTex(
-        #     r"\text{Major}AC = 250^\circ",
-        #     font_size=40,
-        #     color=BLACK
-        # )
-
-        # calculation2.to_edge(UP)
-        # calculation2.shift(DOWN * 1.6)
-
-        # self.play(Write(calculation2))
-        # self.wait(2)
-
-
-
-
 
         # =========================================================
         # 12. Calculate ADC
@@ -542,30 +467,6 @@ class CircleAngleQuestion(Scene):
         self.play(Write(step1))
         self.wait(7)
 
-        # step1.to_edge(DOWN)
-        # step1.shift(UP * 0.4)
-
-        # self.play(Write(step1))
-        # self.wait(2)
-
-        # self.play(FadeOut(step1))
-
-
-        # Initial position: around 3/4 down from the top
-        # step1.move_to(UP * 0.35)
-
-        # self.play(Write(step1))
-        # self.wait(2)
-
-        
-
-        # Shrink and move underneath calculation1
-        # self.play(
-        #     step1.animate
-        #     .scale(20 / 38)
-        #     .next_to(calculation1, DOWN, buff=0.35),
-        #     run_time=1
-        # )
 
         self.wait(2)
 
@@ -588,10 +489,3 @@ class CircleAngleQuestion(Scene):
 
         self.play(Write(answer))
         self.wait(24)
-
-        # answer.to_edge(DOWN)
-        # answer.shift(UP * 0.5)
-
-        # self.play(Write(answer))
-
-        # self.wait(4)

@@ -1,6 +1,14 @@
 from manim import *
 import numpy as np
 
+# =========================================================
+# YouTube Shorts: 9:16 vertical format
+# =========================================================
+config.pixel_width = 1080
+config.pixel_height = 1920
+config.frame_width = 9
+config.frame_height = 16
+
 
 class CircleAngleQuestion(Scene):
 
@@ -14,6 +22,7 @@ class CircleAngleQuestion(Scene):
             r"G:\GananKarayaa\Background.jpeg"
         )
 
+        # Fill the complete 9:16 frame.
         background.set_width(config.frame_width)
         background.set_height(config.frame_height)
 
@@ -29,33 +38,31 @@ class CircleAngleQuestion(Scene):
             "පිහිටි ලක්ෂ්‍ය හතරකි. දී ඇති තොරතුරු ඇසුරෙන්\n"
             "ADC කෝණයේ විශාලත්වය සොයන්න",
             font="Iskoola Pota",
-            font_size=30,
+            font_size=26,
             color=BLACK,
             line_spacing=0.8
         )
 
-        question.to_edge(UP)
+        question.to_edge(UP, buff=0.35)
 
         self.play(Write(question))
-        self.wait(3)
+        self.wait(2)
 
-        # Keep the question visible throughout the video.
-        # Reduce it from font-size 30 appearance to font-size 20
-        # and move it to the top-left to leave room for the diagram.
+        # Keep the question visible at the top throughout the video.
+        # Make it compact so the diagram has enough vertical space.
         self.play(
             question.animate
-            .scale(20 / 30)
-            .to_edge(UP, buff=0.2),
-            # .to_edge(LEFT, buff=0.2),
-            run_time=1
+            .scale(0.82)
+            .to_edge(UP, buff=0.3),
+            run_time=0.7
         )
-        self.wait(1)
+        self.wait(0.5)
 
         # =========================================================
         # 2. Circle
         # =========================================================
 
-        radius = 2.5
+        radius = 2.25
 
         circle = Circle(
             radius=radius,
@@ -138,35 +145,35 @@ class CircleAngleQuestion(Scene):
         label_A = Text(
             "A",
             font="Arial",
-            font_size=30,
+            font_size=26,
             color=BLACK
         ).next_to(dot_A, DOWN + LEFT, buff=0.1)
 
         label_B = Text(
             "B",
             font="Arial",
-            font_size=30,
+            font_size=26,
             color=BLACK
         ).next_to(dot_B, RIGHT, buff=0.1)
 
         label_C = Text(
             "C",
             font="Arial",
-            font_size=30,
+            font_size=26,
             color=BLACK
         ).next_to(dot_C, UP + LEFT, buff=0.1)
 
         label_D = Text(
             "D",
             font="Arial",
-            font_size=30,
+            font_size=26,
             color=BLACK
         ).next_to(dot_D, LEFT, buff=0.1)
 
         label_O = Text(
             "O",
             font="Arial",
-            font_size=30,
+            font_size=26,
             color=BLACK
         ).next_to(dot_O, DOWN, buff=0.15)
 
@@ -234,23 +241,7 @@ class CircleAngleQuestion(Scene):
             Create(line_OC)
         )
 
-        self.wait(2)
-
-        # =========================================================
-        # 8. Mark AOC = 110 degrees
-        #
-        # IMPORTANT:
-        # Do NOT show ADC or ABC values here.
-        # =========================================================
-
-        # angle_AOC = Angle(
-        #     line_AO,
-        #     line_OC,
-        #     radius= -0.65,
-        #     color=BLACK
-        # )
-
-        # self.play(Create(angle_AOC))
+        self.wait(1)
 
         angle_text = MathTex(
             r"110^\circ",
@@ -269,8 +260,7 @@ class CircleAngleQuestion(Scene):
 
         self.play(Write(angle_text))
 
-        self.wait(2)
-        self.wait(18)
+        self.wait(1.5)
 
         # =========================================================
         # Red arrows pointing to AOC and ABC
@@ -300,7 +290,7 @@ class CircleAngleQuestion(Scene):
             GrowArrow(arrow_ABC_red)
         )
 
-        # self.wait(1)
+        self.wait(0.5)
         # =========================================================
         # Blue arrows pointing to ADC and major arc AOC
         # Arrow heads are on the LEFT side
@@ -329,7 +319,7 @@ class CircleAngleQuestion(Scene):
             GrowArrow(arrow_AOC_major_blue)
         )
 
-        # self.wait(1)
+        self.wait(0.5)
 
         # =========================================================
         # Move the complete diagram to the top-right.
@@ -364,29 +354,16 @@ class CircleAngleQuestion(Scene):
             arrow_AOC_major_blue
         )
 
+        # Shorts layout: keep the complete diagram below the question.
+        # It is deliberately kept away from the top text to avoid overlap.
         self.play(
             diagram.animate
-            .scale(0.5)
-            .to_corner(UR, buff=0.25),
-            # .to_edge(RIGHT, buff=0.5),
-            run_time=1.5
+            .scale(0.58)
+            .move_to(DOWN * 1.1),
+            run_time=1.2
         )
 
-        # self.wait(2)
 
-        # =========================================================
-        # At this point the diagram is complete.
-        #
-        # It contains:
-        #   A, B, C, D, O
-        #   AD, DC, CB, BA
-        #   AO, OC
-        #   110°
-        #
-        # NO ADC / ABC values are shown yet.
-        # =========================================================
-
-        # self.wait(5)
 
         # =========================================================
         # . Move Question to left
@@ -394,35 +371,16 @@ class CircleAngleQuestion(Scene):
 
         self.play(
             question.animate
-            .to_edge(LEFT, buff=0.3),
-            run_time=1
+            .to_edge(UP, buff=0.3),
+            run_time=0.8
         )
 
-        # =========================================================
-        # 9. Explain the first step
-        # =========================================================
-
-        # explanation = Text(
-
-        #     "ඕනෑම ලක්ෂයක් වටා ඇති සියලුම කොන වල එකතුව 360° කි \n වෘත්තයේ සම්පූර්ණ කෝණය = 360°",
-        #     font="Iskoola Pota",
-        #     font_size=30,
-        #     color=BLACK
-        # )
-
-        # explanation.to_edge(UP)
-        # explanation.shift(DOWN * 0.8)
-
-        # self.play(Write(explanation))
-        # self.wait(2)
-
-        # self.play(FadeOut(explanation))
 
         explanation = Text(
             "ඕනෑම ලක්ෂයක් වටා ඇති සියලුම කොන වල එකතුව 360°\n"
             "වෘත්තයේ සම්පූර්ණ කෝණය = 360°",
             font="Iskoola Pota",
-            font_size=30,
+            font_size=26,
             color=BLACK
         )
 
@@ -449,30 +407,28 @@ class CircleAngleQuestion(Scene):
         # =========================================================
 
         theory = Text(
-            # "පරිධියේ කෝණය = එයට අදාළ චාපයේ\n"
-            # "කෝණයෙන් භාගයකි",
             "වෘත්ත චාපයක් මගින් කේන්ද්‍රයේ ආපාතනය කරන කෝණය \n පරිධියේ ආපාතනය කරන කෝණය මෙන් දෙගුණයක් වේ",
             font="Iskoola Pota",
-            font_size=34,
+            font_size=28,
             color=BLACK,
             line_spacing=0.8
         )
 
-        theory.move_to(ORIGIN)
+        # Show theory in the middle/lower area without covering the diagram.
+        theory.move_to(DOWN * 5.0)
 
         self.play(Write(theory))
-        self.wait(72)
-        self.wait(10)
-        self.wait(50)
-        # Shrink and move underneath the explanation
+        self.wait(5)
+
+        # Keep the theory visible below the compact explanation.
         self.play(
             theory.animate
-            .scale(20 / 34)
-            .next_to(explanation, DOWN, buff=0.4),
-            run_time=1
+            .scale(0.72)
+            .next_to(explanation, DOWN, buff=0.45),
+            run_time=0.8
         )
 
-        self.wait(2)
+        self.wait(0.8)
 
 
 
@@ -482,46 +438,16 @@ class CircleAngleQuestion(Scene):
 
         calculation1 = MathTex(
             r"\text{Major}AOC = 360^\circ - 110^\circ = 250^\circ ",
-            font_size=38,
+            font_size=34,
             color=BLACK
         )
 
 
-        # Initial position: about 3/4 of the way down from the top
-        calculation1.move_to(
-            UP * 0.5
-        )
+        # Place the first calculation below the theory.
+        calculation1.next_to(theory, DOWN, buff=0.7)
 
         self.play(Write(calculation1))
-        self.wait(2)
-
-        # Shrink and move underneath the theory
-        # self.play(
-        #     calculation1.animate
-        #     .scale(25 / 38)
-        #     .next_to(theory, DOWN, buff=0.35),
-        #     run_time=1
-        # )
-
-        self.wait(7)
-        self.wait(15)
-
-
-        # calculation2 = MathTex(
-        #     r"\text{Major}AC = 250^\circ",
-        #     font_size=40,
-        #     color=BLACK
-        # )
-
-        # calculation2.to_edge(UP)
-        # calculation2.shift(DOWN * 1.6)
-
-        # self.play(Write(calculation2))
-        # self.wait(2)
-
-
-
-
+        self.wait(3)
 
         # =========================================================
         # 12. Calculate ADC
@@ -529,7 +455,7 @@ class CircleAngleQuestion(Scene):
 
         step1 = MathTex(
             r"\angle ADC = \frac{250^\circ}{2}",
-            font_size=38,
+            font_size=34,
             color=BLACK
         )
 
@@ -540,34 +466,7 @@ class CircleAngleQuestion(Scene):
         )
 
         self.play(Write(step1))
-        self.wait(7)
-
-        # step1.to_edge(DOWN)
-        # step1.shift(UP * 0.4)
-
-        # self.play(Write(step1))
-        # self.wait(2)
-
-        # self.play(FadeOut(step1))
-
-
-        # Initial position: around 3/4 down from the top
-        # step1.move_to(UP * 0.35)
-
-        # self.play(Write(step1))
-        # self.wait(2)
-
-        
-
-        # Shrink and move underneath calculation1
-        # self.play(
-        #     step1.animate
-        #     .scale(20 / 38)
-        #     .next_to(calculation1, DOWN, buff=0.35),
-        #     run_time=1
-        # )
-
-        self.wait(2)
+        self.wait(3)
 
         # =========================================================
         # 13. Final answer
@@ -576,7 +475,7 @@ class CircleAngleQuestion(Scene):
         answer = Text(
             "පිළිතුර : ADC කෝණය = 125°",
             font="Iskoola Pota",
-            font_size=46,
+            font_size=38,
             color=BLACK
         )
 
@@ -587,11 +486,4 @@ class CircleAngleQuestion(Scene):
         )
 
         self.play(Write(answer))
-        self.wait(24)
-
-        # answer.to_edge(DOWN)
-        # answer.shift(UP * 0.5)
-
-        # self.play(Write(answer))
-
-        # self.wait(4)
+        self.wait(4)
